@@ -1,0 +1,6 @@
+.notFoundPage {
+  display: flex;
+  max-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+}

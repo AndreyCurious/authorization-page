@@ -1,0 +1,28 @@
+@import './notFoundPage.css';
+@import './/authentification.css';
+
+* {
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(90, 90, 156);
+}
+
+/*
+ - шапка сайта
+ - обязательно ссылка с восстановлением пароля
+ - кнопки входа через соц сети 
+ - валидация:
+    1. пустое поле
+    2. пароль не верный
+    3. пользователя с такой почтой не существует
+
+*/
