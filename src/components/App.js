@@ -1,14 +1,10 @@
-import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from '../appRoutes';
 import '../css/App.css';
+import Authentication from './authentication';
 
 const App = () => (
-  <BrowserRouter>
-    <div className="App">
-      <AppRoutes />
-    </div>
-  </BrowserRouter>
-
+  <div className="App">
+    <Authentication />
+  </div>
 );
 
 export default App;

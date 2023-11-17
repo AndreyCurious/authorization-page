@@ -7,7 +7,7 @@ import routes from '../routes';
 const server = new Server();
 server.post(routes.apiUther(), () => ({ status: 'success' }));
 
-// кнопки авторизации через соц сети - пустышки
+// кнопки авторизации через соц сети - пустышки(знаю как их подключать через uLogin, но нужен бек)
 
 const Authentication = () => {
   const formik = useFormik({
@@ -30,7 +30,8 @@ const Authentication = () => {
         }
       } catch (e) {
         // здесь в зависимости от статуса и кода ошибки с сервера
-        // можно будет вывести в интерфейс ошибки по типу:
+        // можно будет вывести в интерфейс сохранив ошибку в состояние через
+        // useState или менеджер состояния:
         // - Неправильный пароль
         // - Такого пользователя не существует и тд.
         alert('Server error!');
@@ -87,13 +88,13 @@ const Authentication = () => {
           </p>
           <div className="socials">
             <button disabled={formik.isSubmitting} className="icons" type="button">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="" width="25px" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="github" />
             </button>
             <button disabled={formik.isSubmitting} className="icons" type="button">
-              <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" width="25px" />
+              <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="in" />
             </button>
             <button disabled={formik.isSubmitting} className="icons" type="button">
-              <img src="https://play-lh.googleusercontent.com/KSuaRLiI_FlDP8cM4MzJ23ml3og5Hxb9AapaGTMZ2GgR103mvJ3AAnoOFz1yheeQBBI" alt="" width="25px" />
+              <img src="https://play-lh.googleusercontent.com/KSuaRLiI_FlDP8cM4MzJ23ml3og5Hxb9AapaGTMZ2GgR103mvJ3AAnoOFz1yheeQBBI" alt="gmail" />
             </button>
           </div>
         </div>

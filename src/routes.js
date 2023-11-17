@@ -1,6 +1,5 @@
 const routes = {
   authentication: () => '/',
-  notFoundPage: () => '/notfoundpage',
   apiUther: () => 'api/user/auth',
 };
 
