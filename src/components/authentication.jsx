@@ -1,9 +1,13 @@
 import { useFormik } from 'formik';
 import React from 'react';
-// import * as yup from 'yup';
+import * as yup from 'yup';
+import { Server } from 'miragejs';
+import routes from '../routes';
 
-// кнопки авторизации через соц сети пустышки, но сделать их не сложно
-// кнопки стилизованы как ссылки, потому что
+const server = new Server();
+server.post(routes.apiUther(), () => ({ status: 'success' }));
+
+// кнопки авторизации через соц сети - пустышки
 
 const Authentication = () => {
   const formik = useFormik({
@@ -11,9 +15,31 @@ const Authentication = () => {
       email: '',
       password: '',
     },
-    onSubmit: async () => {
-
+    onSubmit: async (value) => {
+      try {
+        const response = await fetch(routes.apiUther(), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: value.email, password: value.password }),
+        });
+        const jsonRes = await response.json();
+        if (jsonRes.status === 'success') {
+          alert('Success');
+        }
+      } catch (e) {
+        // здесь в зависимости от статуса и кода ошибки с сервера
+        // можно будет вывести в интерфейс ошибки по типу:
+        // - Неправильный пароль
+        // - Такого пользователя не существует и тд.
+        alert('Server error!');
+      }
     },
+    validationSchema: yup.object({
+      email: yup.string().required().email(),
+      password: yup.string().required(),
+    }),
   });
   return (
     <div className="auth">
@@ -25,29 +51,48 @@ const Authentication = () => {
           <form onSubmit={formik.handleSubmit}>
             <h1>Authentication</h1>
             <div className="field">
-              <input className="formElem formInput" type="text" name="email" id="email" required />
+              <input
+                className="formElem formInput"
+                type="text"
+                name="email"
+                id="email"
+                required
+                value={formik.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
               <label className="placeholder">Email</label>
             </div>
             <div className="field">
-              <input className="formElem formInput" type="text" name="password" id="pass" required />
+              <input
+                className="formElem formInput"
+                type="password"
+                name="password"
+                id="pass"
+                required
+                value={formik.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
               <label className="placeholder">Password</label>
             </div>
-            <button className="formElem formBtn" type="submit">
+            <p className="formError">{formik.errors.email ? formik.errors.email : formik.errors.password}</p>
+            <button disabled={formik.isSubmitting} className="formElem formBtn" type="submit">
               Log in
             </button>
           </form>
           <p className="passwordRecovery">
             Forgot password?
-            <a href="#" className="forgetPass" type="button">Click here</a>
+            <a href="#" className="forgotPass" type="button">Click here</a>
           </p>
           <div className="socials">
-            <button className="icons" type="button">
+            <button disabled={formik.isSubmitting} className="icons" type="button">
               <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="" width="25px" />
             </button>
-            <button className="icons" type="button">
+            <button disabled={formik.isSubmitting} className="icons" type="button">
               <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" width="25px" />
             </button>
-            <button className="icons" type="button">
+            <button disabled={formik.isSubmitting} className="icons" type="button">
               <img src="https://play-lh.googleusercontent.com/KSuaRLiI_FlDP8cM4MzJ23ml3og5Hxb9AapaGTMZ2GgR103mvJ3AAnoOFz1yheeQBBI" alt="" width="25px" />
             </button>
           </div>

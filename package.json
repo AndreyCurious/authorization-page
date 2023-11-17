@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "formik": "^2.4.5",
+    "miragejs": "^0.1.48",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
@@ -43,7 +44,6 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-functional": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "miragejs": "^0.1.48"
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
